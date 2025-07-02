@@ -1,6 +1,7 @@
 import React from 'react';
 import ProductCard from './ProductCard';
 
+// ---- 완료 ----
 //TODO: 상품 목록을 저장하는 products 배열을 완성하세요.
 //이미지 데이터는 public 폴더내에 파일을 사용하세요.
 
@@ -17,13 +18,25 @@ const products = [
     { id: 10, name: '무드등 가습기', price: 69000, img: '/sample.png' },
     { id: 11, name: '라면 5개입', price: 5500, img: '/sample.png' },
     { id: 12, name: '고양이 사료 2kg', price: 29000, img: '/sample.png' },
-];
+]
 
+products.forEach((product, index) => {
+    const indexInFileName = index + 1
+    if (indexInFileName < 10) {
+        product.img = `0${indexInFileName}.png`
+        return
+    }
+    product.img = `${indexInFileName}.png`
+})
+
+// ---- 완료 -----
 //TODO: ProductList 컴포넌트를 완성하세요.
 //ProductCard 컴포넌트를 사용하여 각 상품을 렌더링하세요.
 //ProductCard 컴포넌트를 확인하여 props를 전달하세요.
 const ProductList = ({ addToCart }) => {
-    return <div className="product-list"></div>;
+    return <div className="product-list">
+        {products.map((product) => <ProductCard key={product.id} product={product} addToCart={addToCart} />)}
+    </div>;
 };
 
 export default ProductList;
